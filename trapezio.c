@@ -27,7 +27,7 @@ int main(void){
         total_int = local_int;
         for (origem = 1; origem < comm_sz; origem++){
             MPI_Recv(&local_int, 1, MPI_DOUBLE, origem, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            total += local_int;
+            total_int += local_int;
         }
     }
 
@@ -36,5 +36,27 @@ int main(void){
         printf("da integral de %f ate %f = %.15e\n", a, b, total_int);
     }
 
+    MPI_Finalize();
+    
+    return 0;
 
+}
+
+double trapezio(double limite_esq, double limite_dir, int numero_trap, double tam_altura){
+    double estimativa, x;
+    int i;
+
+    estimativa = (f(limite_esq) + f(limite_dir))/2.0;
+    for (i = 1; i <= numero_trap-1; i++){
+        x = limite_esq + i*tam_altura;
+        estimativa += f(x);
+    }
+    estimativa *= tam_altura;
+
+    return estimativa;
+
+}
+
+double f(double x){
+    return -(x*x) + 4;
 }
