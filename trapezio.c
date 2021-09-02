@@ -7,7 +7,7 @@ double f(double x);
 
 int main(void){
     int meu_rank, comm_sz, n = 1024, local_n;
-    double a = -2.0, b = 2.0, h, local_a, local_b;
+    double a = -0.5, b = 2.0, h, local_a, local_b;
     double local_int, total_int;
     int origem;
 
@@ -58,5 +58,5 @@ double trapezio(double limite_esq, double limite_dir, int numero_trap, double ta
 }
 
 double f(double x){
-    return -(x*x) + 4;
+    return -2*(x*x) + 3*x + 2;
 }
